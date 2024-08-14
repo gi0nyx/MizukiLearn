@@ -4,7 +4,7 @@ import { onMount } from 'svelte';
 let rows = [];
 
 onMount(async () => {
-  const url = 'http://170.64.174.213:8000/get_values';
+  const url = 'https://webapiweb.online:8000/get_values';
 
   try {
     const response = await fetch(url);
