@@ -82,7 +82,7 @@
             </div>
             <div class="feature">
                 <h2>Profiles and Badges</h2>
-                <p>Show off your profile, make friends</p>
+                <p>Coming Soon! Show off your profile, Connect with other people like you </p>
             </div>
         </section>
 

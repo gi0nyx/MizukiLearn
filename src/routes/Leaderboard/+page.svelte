@@ -1,28 +1,34 @@
 <script>
 import SvelteTable from "svelte-table";
+import { onMount } from 'svelte';
+let rows = [];
 
-const rows = [
-  { "name": "Queen", "score": 440, "card_review": 66, "card_retention": 95, "rank": 1 },
-  { "name": "Albert", "score": 420, "card_review": 63, "card_retention": 94, "rank": 2 },
-  { "name": "Elvis", "score": 410, "card_review": 60, "card_retention": 91, "rank": 3 },
-  { "name": "Charles", "score": 400, "card_review": 59, "card_retention": 92, "rank": 4 },
-  { "name": "Paul", "score": 390, "card_review": 54, "card_retention": 88, "rank": 5 },
-  { "name": "Christopher", "score": 380, "card_review": 55, "card_retention": 89, "rank": 6 },
-  { "name": "Margaret", "score": 360, "card_review": 58, "card_retention": 90, "rank": 7 },
-  { "name": "John F.", "score": 350, "card_review": 53, "card_retention": 88, "rank": 8 },
-  { "name": "Muhammad", "score": 340, "card_review": 62, "card_retention": 91, "rank": 9 },
-  { "name": "George", "score": 330, "card_review": 50, "card_retention": 87, "rank": 10 },
-  { "name": "Mahatma", "score": 320, "card_review": 64, "card_retention": 93, "rank": 11 },
-  { "name": "Nelson", "score": 310, "card_review": 61, "card_retention": 92, "rank": 12 },
-  { "name": "Winston", "score": 290, "card_review": 56, "card_retention": 89, "rank": 13 },
-  { "name": "Martin Luther", "score": 280, "card_review": 47, "card_retention": 83, "rank": 14 },
-  { "name": "Bill", "score": 270, "card_review": 49, "card_retention": 86, "rank": 15 },
-  { "name": "Mother", "score": 300, "card_review": 68, "card_retention": 95, "rank": 16 },
-  { "name": "Abraham", "score": 200, "card_review": 57, "card_retention": 90, "rank": 17 },
-  { "name": "Marilyn", "score": 100, "card_review": 42, "card_retention": 85, "rank": 18 },
-  
+onMount(async () => {
+  const url = 'http://170.64.174.213:8000/get_values';
 
-];
+  try {
+    const response = await fetch(url);
+    const { data, status } = await response.json();
+
+    if (status === 'success') {
+      rows = data
+        .map(entry => ({
+          name: entry[0],
+          score: entry[1]
+        }))
+        .sort((a, b) => b.score - a.score)  // Sort by score in descending order
+        .map((entry, index) => ({
+          rank: index + 1,  // Add rank based on position in sorted array
+          ...entry
+        }));
+    } else {
+      console.error('API responded with status:', status);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+});
+
 
 
 const columns = [
@@ -54,6 +60,7 @@ const columns = [
     filterValue: v => Math.floor(v.score / 10),
     headerClass: "text-left",
   },
+  /*
   {
     key: "card_review",
     title: "Card Review",
@@ -98,6 +105,7 @@ const columns = [
     filterValue: v => Math.floor(v.card_retention / 10),
     headerClass: "text-left",
   },
+  */
   {
     key: "rank",
     title: "Rank",
@@ -120,6 +128,7 @@ const columns = [
     filterValue: v => Math.floor(v.rank / 10),
     headerClass: "text-left",
   },
+  
 
 ];
 
@@ -139,15 +148,18 @@ const columns = [
         border-radius: 8px;
         padding: 10px;
         width: 80%;
+        min-height: 70vh;
         margin-left: auto;
         margin-right: auto;
     }
+
+
 
     footer {
             background-color: #0066cc;
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem;
             margin-top: 2rem;
             border-radius: 0 0 8px 8px;
         }
