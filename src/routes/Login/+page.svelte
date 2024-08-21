@@ -130,33 +130,31 @@
         let password = '';
 
         const handleLogin = async () => {
-        try {
-            const response = await fetch('https://webapiweb.online:8000/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            });
+    try {
+        const response = await fetch('https://webapiweb.online:8000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password
+            }),
+            credentials: 'include' // This is important for receiving cookies
+        });
 
+        if (response.ok) {
+            alert('Login successful');
+            window.location.href = '/protected/user';
+        } else {
             const data = await response.json();
-            if (response.ok) {
-                alert('Login successful');
-                // Set cookie with JWT token
-                document.cookie = `access_token=${data.access_token}; path=/; SameSite=None; Secure`;
-                //alert(document.cookie)
-                window.location.href = '/protected/user'; // Redirect to a dashboard page after login
-            } else {
-                alert(`Login failed: ${data.message}`);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred during login');
+            alert(`Login failed: ${data.message}`);
         }
-    };
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred during login');
+    }
+};
 
 
 
