@@ -146,9 +146,9 @@
             if (response.ok) {
                 alert('Login successful');
                 // Set cookie with JWT token
-                document.cookie = `access_token=${data.access_token}; path=/; domain=mizukilearn.com; SameSite=None; Secure`;
-                alert(document.cookie)
-                //window.location.href = '/protected/user'; // Redirect to a dashboard page after login
+                document.cookie = `access_token=${data.access_token}; path=/; SameSite=None; Secure`;
+                //alert(document.cookie)
+                window.location.href = '/protected/user'; // Redirect to a dashboard page after login
             } else {
                 alert(`Login failed: ${data.message}`);
             }
