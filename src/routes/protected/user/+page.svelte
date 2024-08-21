@@ -11,28 +11,23 @@
     let userData: UserData = {};
 
     onMount(async () => {
-    try {
-        // Get the token from the cookie
-        const token = document.cookie.split('; ').find(row => row.startsWith('access_token=')).split('=')[1];
-        
-        const response = await fetch('https://webapiweb.online:8000/me', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
+        try {
+            const response = await fetch('https://webapiweb.online:8000/me', {
+                method: 'GET',
+                credentials: 'include', // This will include cookies in the request
+            });
 
-        if (response.ok) {
-            userData = await response.json();
-        } else {
-            console.error('Unauthorized or error response');
+            if (response.ok) {
+                userData = await response.json() as UserData;
+            } else {
+                console.error('Unauthorized or error response');
+                //window.location.href = '/Login';
+            }
+        } catch (error) {
+            console.error('Error:', error);
             //window.location.href = '/Login';
         }
-    } catch (error) {
-        console.error('Error:', error);
-        //window.location.href = '/Login';
-    }
-});
+    });
 </script>
 
 {#if Object.keys(userData).length > 0}
