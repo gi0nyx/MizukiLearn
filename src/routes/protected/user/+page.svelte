@@ -18,7 +18,7 @@
             });
 
             if (response.ok) {
-                userData = await response.json() as UserData;
+                userData = await response.json();
             } else {
                 console.error('Unauthorized or error response');
                 //window.location.href = '/Login';
