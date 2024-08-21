@@ -26,11 +26,11 @@
             userData = await response.json();
         } else {
             console.error('Unauthorized or error response');
-            window.location.href = '/Login';
+            //window.location.href = '/Login';
         }
     } catch (error) {
         console.error('Error:', error);
-        window.location.href = '/Login';
+        //window.location.href = '/Login';
     }
 });
 </script>
