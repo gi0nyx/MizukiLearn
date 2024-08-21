@@ -68,7 +68,7 @@
         <section class="hero" id="home">
             <h1>Welcome to MizukiLearn.com</h1>
             <p>Embark on a journey of knowledge with Mizuki-chan as your guide!</p>
-            <a href="#" class="cta-button">Start Learning</a>
+            <a href="/Login" class="cta-button">Start Learning</a>
         </section>
 
         <section class="features">
