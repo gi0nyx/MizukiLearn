@@ -173,34 +173,15 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import Badges from './badges.svelte';
+    import { userData} from '../../../stores/userStore';
 
     // Define an interface for the user data structure
-    interface UserData {
-        name?: string;
-        email?: string;
-        // Add other properties that you expect to receive from the API
-    }
 
-    let userData: UserData = {};
+  let user;
+  userData.subscribe(value => {
+    user = value;
+  });
 
-    onMount(async () => {
-        try {
-            const response = await fetch('https://webapiweb.online:8000/me', {
-                method: 'GET',
-                credentials: 'include', // This will include cookies in the request
-            });
-
-            if (response.ok) {
-                userData = await response.json();
-            } else {
-                console.error('Unauthorized or error response');
-                window.location.href = '/Login';
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            window.location.href = '/Login';
-        }
-    });
 
     let badges = [
         { name: '5 days badge', achieved: true, imageUrl: '../images/5_days.png' },
@@ -218,8 +199,8 @@
             <div class="profile-avatar">
                 <img src="../images/mizuki-chan.png" alt="Mizuki-chan">
             </div>
-            {#if Object.keys(userData).length > 0}
-            <h1>Welcome, {userData.name || 'Name'}</h1>
+            {#if Object.keys(user).length > 0}
+            <h1>Welcome, {user.name || 'Name'}</h1>
             {:else}
         <p>Loading...</p>
         {/if}

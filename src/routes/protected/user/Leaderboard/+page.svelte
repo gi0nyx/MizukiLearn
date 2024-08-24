@@ -6,7 +6,12 @@
   let searchQuery = writable("");
   let filterByScore = writable("");
 
+
+
+
+
   onMount(async () => {
+
     const url = 'https://webapiweb.online:8000/get_values';
 
     try {
@@ -32,6 +37,8 @@
     } catch (error) {
       console.error('Error fetching data:', error);
     }
+
+
   });
 
   const filteredRows = derived(
