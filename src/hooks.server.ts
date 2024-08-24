@@ -1,4 +1,5 @@
 // src/hooks.server.ts
+import { redirect } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -9,6 +10,15 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (access_token) {
         event.request.headers.set('Authorization', `Bearer ${access_token}`);
     }
+
+    // Extract the pathname for the current request
+    const { pathname } = event.url;
+
+    // Define which paths require authentication
+    const protectedPaths = ['/protected', '/protected/'];
+
+    // Check if the current path is protected
+    
 
     const response = await resolve(event);
 
