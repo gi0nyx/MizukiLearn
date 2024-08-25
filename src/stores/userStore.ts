@@ -25,56 +25,48 @@ async function fetchUserData() {
             const data: UserData = await response.json();
             userData.set({ ...data, isAuthenticated: true });
         } else {
-            console.error('Unauthorized or error response');
+            console.error(`Error: ${response.status} - ${response.statusText}`);
+            if (response.status === 401) {
+                console.log('User is not authenticated');
+            }
             userData.set(initialUserData);
-            goto('/Login');
+            // Uncomment the following line if you want to redirect to login page
+            // await goto('/Login');
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Network error:', error);
         userData.set(initialUserData);
-        goto('/Login');
+        // Uncomment the following line if you want to redirect to login page
+        // await goto('/Login');
     }
 }
 
 function checkAuth() {
     return new Promise<boolean>((resolve) => {
-        let unsubscribe: () => void; // Declare the unsubscribe variable
-
-        // Use a local flag to track if the user is already authenticated
+        let unsubscribe: () => void;
         let alreadyAuthenticated = false;
 
-        // Subscribe to the store and assign `unsubscribe`
         unsubscribe = userData.subscribe(user => {
             if (user.isAuthenticated) {
                 alreadyAuthenticated = true;
-                if (unsubscribe) unsubscribe();  // Unsubscribe safely if it exists
+                if (unsubscribe) unsubscribe();
                 resolve(true);
             }
         });
 
-        // If not authenticated, fetch user data and resolve after
         if (!alreadyAuthenticated) {
             fetchUserData().then(() => {
-                let currentUser: UserData | undefined;
-
-                // Subscribe to the store to get the current value
-                const unsubscribeFetch = userData.subscribe(user => {
-                    currentUser = user;
+                userData.subscribe(user => {
+                    if (unsubscribe) unsubscribe();
+                    resolve(user.isAuthenticated);
                 });
-
-                // Unsubscribe from the store after getting the value
-                unsubscribeFetch();
-
-                if (currentUser) {
-                    resolve(currentUser.isAuthenticated);
-                } else {
-                    resolve(false);  // In case there's no user data
-                }
+            }).catch(error => {
+                console.error('Error in checkAuth:', error);
+                if (unsubscribe) unsubscribe();
+                resolve(false);
             });
         }
     });
 }
-
-
 
 export { userData, fetchUserData, checkAuth };

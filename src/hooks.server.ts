@@ -12,10 +12,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     }
 
     // Extract the pathname for the current request
-    const { pathname } = event.url;
-
     // Define which paths require authentication
-    const protectedPaths = ['/protected', '/protected/'];
 
     // Check if the current path is protected
     
