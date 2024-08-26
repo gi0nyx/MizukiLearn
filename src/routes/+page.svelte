@@ -73,16 +73,16 @@
 
         <section class="features">
             <div class="feature">
-                <h2>Real-time Leaderboard</h2>
+                <h2>Leaderboard</h2>
                 <p>Compete with friends and track your progress in real-time!</p>
             </div>
             <div class="feature">
-                <h2>Engaging Quizzes/ Games</h2>
-                <p>Coming Soon! Test your knowledge with interactive quizzes and games.</p>
+                <h2>Quizzes/ Games</h2>
+                <p>Coming Soon! </p>
             </div>
             <div class="feature">
                 <h2>Profiles and Badges</h2>
-                <p>Coming Soon! Show off your profile, Connect with other people like you </p>
+                <p>Coming Soon! </p>
             </div>
         </section>
 
