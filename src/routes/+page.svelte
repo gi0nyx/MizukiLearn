@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MizukiLearn</title>
     <style>
-        
-       
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -60,17 +65,37 @@
             padding: 1rem;
             margin-top: 2rem;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .hero {
+                padding: 2rem 0;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .features {
+                flex-direction: column;
+            }
+            .feature {
+                width: 100%;
+                margin: 1rem 0;
+            }
+            .mascot img {
+                max-width: 150px;
+            }
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <section class="hero" id="home">
             <h1>Welcome to MizukiLearn.com</h1>
             <p>Embark on a journey of knowledge with Mizuki-chan as your guide!</p>
             <a href="/Login" class="cta-button">Start Learning</a>
         </section>
-
         <section class="features">
             <div class="feature">
                 <h2>Leaderboard</h2>
@@ -78,23 +103,20 @@
             </div>
             <div class="feature">
                 <h2>Quizzes/ Games</h2>
-                <p>Coming Soon! </p>
+                <p>Coming Soon!</p>
             </div>
             <div class="feature">
                 <h2>Profiles and Badges</h2>
-                <p>Coming Soon! </p>
+                <p>Coming Soon!</p>
             </div>
         </section>
-
         <section class="mascot">
             <img src="images/mizuki-chan.png" alt="Mizuki-chan">
             <h2>Meet Mizuki-chan</h2>
             <p>Your resilient and empathetic guide on this learning adventure!</p>
         </section>
     </div>
-
     <footer>
         <p>&copy; 2024 MizukiLearn.com. All rights reserved.</p>
     </footer>
 </body>
-
