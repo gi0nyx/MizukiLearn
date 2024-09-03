@@ -145,7 +145,7 @@
 
         if (response.ok) {
             alert('Login successful');
-            alert(`Login: ${document.cookie}`);
+            //alert(`Login: ${document.cookie}`);
             window.location.href = '/protected/user';
         } else {
             const data = await response.json();
