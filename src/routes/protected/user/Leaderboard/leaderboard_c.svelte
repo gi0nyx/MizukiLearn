@@ -59,6 +59,10 @@
         <th>Rank</th>
         <th>Name</th>
         <th>Score</th>
+        <th>Again</th>
+        <th>Hard</th>
+        <th>Good</th>
+        <th>Easy</th>
       </tr>
     </thead>
     <tbody>
@@ -67,6 +71,10 @@
           <td>{row.rank}</td>
           <td>{row.name}</td>
           <td>{row.score}</td>
+          <td>{row.again}</td>
+          <td>{row.hard}</td>
+          <td>{row.good}</td>
+          <td>{row.easy}</td>
         </tr>
       {/each}
     </tbody>

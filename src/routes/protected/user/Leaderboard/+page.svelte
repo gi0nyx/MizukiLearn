@@ -36,7 +36,11 @@
       if (status === 'success') {
         rows = data.map(entry => ({
           name: entry[0],
-          score: entry[1]
+          score: entry[1],
+          again: entry[2],
+          hard: entry[3],
+          good: entry[4],
+          easy: entry[5]
         }));
       } else {
         console.error('API responded with status:', status);
@@ -59,7 +63,11 @@
       if (status === 'success') {
         custom_rows = data.map(entry => ({
           name: entry[0],
-          score: entry[1]
+          score: entry[1],
+          again: entry[2],
+          hard: entry[3],
+          good: entry[4],
+          easy: entry[5]
         }));
       } else {
         console.error('API responded with status:', status);
