@@ -116,12 +116,14 @@
       const { status, message } = await response.json();
 
       if (status === 'success') {
+        alert("Successfully joined leaderboard");
         console.log('Successfully joined leaderboard:', message);
         await fetchLeaderboardName();
       } else {
         console.error('Failed to join leaderboard:', message);
       }
     } catch (error) {
+      alert("Failed to join leaderboard");
       console.error('Error joining leaderboard:', error);
     }
   }
@@ -140,9 +142,11 @@
       const { status, message } = await response.json();
 
       if (status === 'success') {
+        alert("Successfully created leaderboard");
         console.log('Successfully created leaderboard:', message);
         await fetchLeaderboardName();
       } else {
+        alert("Failed to create leaderboard");
         console.error('Failed to create leaderboard:', message);
       }
     } catch (error) {
