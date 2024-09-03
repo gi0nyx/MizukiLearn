@@ -147,7 +147,7 @@
             });
 
             const data = await response.json();
-            if (response.ok) {
+            if (response.ok && data.status === 'success') {
                 alert('Signup successful');
             } else {
                 alert(`Signup failed: ${data.message}`);
