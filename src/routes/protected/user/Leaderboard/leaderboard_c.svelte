@@ -1,7 +1,52 @@
 <script>
-  import { writable, derived } from 'svelte/store';
+  import { writable, derived,} from 'svelte/store';
+  import { onMount } from 'svelte';
 
   export let data = [];
+
+  let countdown = writable("00:00:00");
+
+  function getTimeUntilNextSunday() {
+    const now = new Date();
+    
+    
+    const daysUntilSunday = (7 - now.getUTCDay()) % 7;
+    //console.log(daysUntilSunday);
+    
+    const nextSunday = new Date(
+        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + daysUntilSunday)
+    );
+    //console.log(nextSunday.getTime() - now.getTime())
+    return nextSunday.getTime() - now.getTime();
+}
+
+
+  function updateCountdown() {
+    const timeLeft = getTimeUntilNextSunday();
+
+    if (timeLeft > 0) {
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      // Here, we only show hours, minutes, and seconds, as days are not part of your original format
+      countdown.set(`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
+    } else {
+      countdown.set("00:00:00");
+      // Here you might want to do something when the countdown reaches zero, like reset or trigger an event
+    }
+  }
+
+  onMount(() => {
+    updateCountdown(); // Initial call
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval); // Cleanup on component destroy
+  });
+
+
+
 
   let rows = writable(
     data.sort((a, b) => b.score - a.score)
@@ -38,6 +83,8 @@
 
 <section class="leaderboard">
   <div class="filters">
+
+    <div>Next Reset: {$countdown}</div>
     <input
       type="text"
       placeholder="Search by name"
