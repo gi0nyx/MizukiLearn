@@ -129,73 +129,128 @@
 </section>
 
 <style>
-  .leaderboard {
-    margin-top: 2%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-    border: 2px solid #82b1ff;
-    border-radius: 15px;
-    padding: 20px;
-    width: 85%;
-    min-height: 70vh;
-    margin-left: auto;
-    margin-right: auto;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    position: relative;
-  }
+.leaderboard {
+  margin-top: 2%;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border: 2px solid #82b1ff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 85%;
+  min-height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
 
-  .filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 10px;
-    position: relative;
-    z-index: 2;
-  }
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  position: relative;
+  z-index: 2;
+}
 
+.filter-input {
+  width: 45%;
+  padding: 12px;
+  border: 2px solid #82b1ff;
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: #f0f8ff;
+  color: #0066cc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+th, td {
+  border: 1px solid #82b1ff;
+  text-align: center;
+  padding: 15px;
+  font-size: 16px;
+  color: #0066cc;
+}
+
+th {
+  background-color: rgba(130, 177, 255, 0.9);
+  font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(173, 216, 230, 0.3);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgba(173, 216, 230, 0.15);
+}
+
+tbody tr:hover {
+  background-color: rgba(173, 216, 230, 0.5);
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
   .filter-input {
-    width: 45%;
-    padding: 12px;
-    border: 2px solid #82b1ff;
-    border-radius: 12px;
-    font-size: 16px;
-    background-color: #f0f8ff;
-    color: #0066cc;
+    width: 100%; /* Inputs take full width */
+    margin-bottom: 10px;
+  }
+
+  table, th, td {
+    font-size: 14px; /* Slightly reduce font size */
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .leaderboard {
+    width: 100%; /* Make the leaderboard width 100% on mobile */
   }
 
   table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    position: relative;
-    z-index: 2;
+    display: block;
+    overflow-x: auto; /* Horizontal scrolling for the table */
+    white-space: nowrap; /* Prevent content wrapping */
   }
 
   th, td {
-    border: 1px solid #82b1ff;
-    text-align: center;
-    padding: 15px;
-    font-size: 16px;
-    color: #0066cc;
+    text-align: left; /* Align text to the left on mobile */
+  }
+  
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .filter-input {
+    width: 100%; /* Inputs take full width */
+    margin-bottom: 10px;
   }
 
-  th {
-    background-color: rgba(130, 177, 255, 0.9);
-    font-weight: bold;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  table, th, td {
+    font-size: 14px; /* Slightly reduce font size */
+    padding: 10px; /* Reduce padding for smaller screens */
   }
 
-  tbody tr:nth-child(even) {
-    background-color: rgba(173, 216, 230, 0.3);
+  .leaderboard {
+    width: 100%; /* Make the leaderboard width 100% on mobile */
   }
 
-  tbody tr:nth-child(odd) {
-    background-color: rgba(173, 216, 230, 0.15);
+  table {
+    display: block;
+    overflow-x: auto; /* Horizontal scrolling for the table */
+    white-space: nowrap; /* Prevent content wrapping */
   }
 
-  tbody tr:hover {
-    background-color: rgba(173, 216, 230, 0.5);
+  th, td {
+    text-align: left; /* Align text to the left on mobile */
   }
+}
+}
 </style>
